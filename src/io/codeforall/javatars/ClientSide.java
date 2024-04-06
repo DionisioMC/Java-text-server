@@ -114,7 +114,7 @@ public class ClientSide implements Runnable {
     public static synchronized void greet(String name) throws IOException {
         for (ClientSide client : Server.clientList) {
             client.out.write((name + " has entered the chat\n" +
-                    "Write commands on the console to see what you can do").getBytes());
+                    "Write commands on the console to see what you can do\n").getBytes());
             client.out.flush();
         }
     }
