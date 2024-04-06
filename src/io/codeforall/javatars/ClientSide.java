@@ -4,14 +4,12 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ClientSide implements Runnable {
 
     private Socket clientSocket;
     private String name;
-    private ServerSocket serverSocket;
     private BufferedOutputStream out;
     private BufferedReader in;
 
@@ -27,7 +25,6 @@ public class ClientSide implements Runnable {
         out = new BufferedOutputStream(clientSocket.getOutputStream());
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         getLoggedIn();
-        System.out.println(name + " has entered the chat");
     }
 
     public void getLoggedIn() throws IOException {
@@ -56,7 +53,7 @@ public class ClientSide implements Runnable {
     @Override
     public void run() {
         try {
-            greet(this.name);
+            greet(name);
             while (true) {
                 String message = in.readLine();
                 if (message == null || message.equals("quit")) {
